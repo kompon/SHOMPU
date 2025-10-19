@@ -1,0 +1,183 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 07, 2025 at 05:17 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.1.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `hotel_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `booking` int(11) NOT NULL,
+  `room_code` int(11) NOT NULL COMMENT 'none_3',
+  `booking_date` date NOT NULL COMMENT 'none_3',
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`booking`, `room_code`, `booking_date`, `start_time`, `end_time`, `user_id`) VALUES
+(10, 4, '2025-09-11', '10:30:00', '15:00:00', 5),
+(11, 3, '2025-09-27', '16:00:00', '17:00:00', 5),
+(12, 4, '2025-09-17', '14:30:00', '16:00:00', 5),
+(13, 2, '2025-09-15', '13:30:00', '15:30:00', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hotel_info`
+--
+
+CREATE TABLE `hotel_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `banner_image` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `meeting_rooms`
+--
+
+CREATE TABLE `meeting_rooms` (
+  `id` int(11) NOT NULL,
+  `room_code` int(20) NOT NULL,
+  `room_name` varchar(255) DEFAULT NULL,
+  `description` text NOT NULL,
+  `capacity` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `room_size` varchar(50) DEFAULT NULL,
+  `tools` text DEFAULT NULL,
+  `room_status` enum('available','unavailable') DEFAULT 'available',
+  `equipment` text DEFAULT NULL,
+  `price_per_hour` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `meeting_rooms`
+--
+
+INSERT INTO `meeting_rooms` (`id`, `room_code`, `room_name`, `description`, `capacity`, `image`, `room_size`, `tools`, `room_status`, `equipment`, `price_per_hour`) VALUES
+(1, 1, 'ห้องประชุมภูเวียง', 'ห้องประชุมภูเวียงที่โรงแรมขอนแก่นโฮเต็ลได้รับการออกแบบให้มีความทันสมัยและตอบสนองความต้องการขององค์กรและธุรกิจที่ต้องการพื้นที่จัดประชุมที่มีคุณภาพ ด้วยบรรยากาศที่สงบและเป็นมืออาชีพ ห้องประชุมสามารถรองรับผู้เข้าร่วมได้สูงสุดถึง 100 ท่าน เหมาะสำหรับการจัดสัมมนา การฝึกอบรม หรือการประชุมภายในองค์กร\r\n\r\nห้องประชุมนี้มาพร้อมกับอุปกรณ์ที่ทันสมัย เช่น เครื่องโปรเจคเตอร์คุณภาพสูง, จอภาพขนาดใหญ่, ระบบเสียงคมชัด, และไมโครโฟนไร้สาย รวมถึงระบบแสงสว่างที่สามารถปรับเปลี่ยนได้ตามความต้องการ ห้องมีระบบแอร์ที่สามารถปรับอุณหภูมิได้ เพื่อความสะดวกสบายของผู้ใช้งาน\r\n\r\nนอกจากนี้ โรงแรมยังมีบริการเครื่องดื่มกาแฟและน้ำดื่มตลอดระยะเวลาการประชุม พร้อมทั้งการบริการอาหารว่างที่สามารถจัดเตรียมได้ตามความต้องการของผู้ใช้บริการ สิ่งอำนวยความสะดวกเหล่านี้ช่วยให้การประชุมของคุณเป็นไปอย่างราบรื่นและมีประสิทธิภาพ\r\n\r\nโรงแรมขอนแก่นโฮเต็ลตั้งอยู่ในทำเลสะดวกในการเดินทาง พร้อมที่จอดรถเพียงพอ และบริการที่พักระดับมาตรฐานที่สะดวกสบายสำหรับผู้เข้าร่วมประชุมจากต่างจังหวัดหรือต่างประเทศ หากคุณกำลังมองหาสถานที่ที่ครบครันสำหรับการจัดประชุม\r\n-เหมาะสำหรับ: การประชุมขนาดกลาง, การสัมมนา, การฝึกอบรม', 100, 'images.jpg', '80 ตร.ม.', '-โปรเจคเตอร์สำหรับการนำเสนอ\r\n-หน้าจอแสดงผล ขนาดใหญ่สำหรับการนำเสนอ\r\n-ไมโครโฟน (แบบไร้สายหรือมีสาย)\r\n-เครื่องเสียง ที่มีคุณภาพ\r\n-Wi-Fi ความเร็วสูง\r\n-โต๊ะและเก้าอี้ ที่สะดวกสบาย\r\n-แอร์ เพื่อความเย็นสบายในห้อง\r\n-อุปกรณ์เสริมอื่นๆ เช่น กระดานไวท์บอร์ด, ปากกา, กระดาษโน้ต', 'available', NULL, 500.00),
+(2, 2, 'ห้องประชุมภูผาม่าน', 'ห้องประชุมภูผาม่านที่โรงแรมขอนแก่นโฮเต็ลเป็นสถานที่ที่ออกแบบมาเพื่อรองรับทุกความต้องการขององค์กรและธุรกิจที่ต้องการความเป็นมืออาชีพและบรรยากาศที่เงียบสงบ สำหรับการจัดการประชุมและกิจกรรมต่างๆ โดยเฉพาะการจัดสัมมนา การฝึกอบรม หรือการประชุมภายในองค์กรที่ต้องการพื้นที่ที่สามารถรองรับการทำงานอย่างมีประสิทธิภาพ\r\n\r\nห้องประชุมภูผาม่านมีขนาดกว้างขวางและสามารถรองรับผู้เข้าร่วมได้สูงสุดถึง 80 ท่าน ด้วยพื้นที่ที่ออกแบบมาอย่างเหมาะสม ทำให้สามารถจัดกิจกรรมต่างๆ ได้อย่างสะดวกสบาย รวมทั้งยังสามารถจัดเก้าอี้และโต๊ะให้ตรงกับความต้องการของผู้จัดงานได้ตามลักษณะของกิจกรรม\r\n\r\nภายในห้องประชุมได้ติดตั้งอุปกรณ์ทันสมัยครบครัน เช่น เครื่องโปรเจคเตอร์คุณภาพสูง จอภาพขนาดใหญ่ ระบบเสียงที่คมชัด ไมโครโฟนไร้สาย รวมถึงมีระบบแสงสว่างที่สามารถปรับได้ตามความต้องการ และระบบแอร์ที่สามารถปรับอุณหภูมิให้เหมาะสมกับจำนวนผู้ใช้งาน เพื่อความสะดวกสบายสูงสุด\r\nโรงแรมขอนแก่นโฮเต็ลยังมีบริการเครื่องดื่มกาแฟและน้ำดื่มตลอดการประชุม และยังมีบริการอาหารว่างที่สามารถจัดเตรียมตามความต้องการของผู้ใช้งาน เพื่อให้ทุกการประชุมมีความสมบูรณ์และราบรื่น\r\n\r\nห้องประชุมภูผาม่านตั้งอยู่ในทำเลที่สะดวกในการเดินทางพร้อมที่จอดรถเพียงพอ และบริการที่พักที่มีคุณภาพ เหมาะสำหรับผู้เข้าร่วมประชุมจากต่างจังหวัดและต่างประเทศ หากคุณกำลังมองหาห้องประชุมที่ครบครันและมีสิ่งอำนวยความสะดวกที่ดีเยี่ยม\r\n-เหมาะสำหรับ: งานประชุมใหญ่, การจัดงานสัมมนา, งานเลี้ยงหรือกิจกรรมต่าง ๆ', 80, '002.jpg', '120 ตร.ม.', 'จัดโต๊ะจีนได้ 30 โต๊ะ', 'available', NULL, 600.00),
+(3, 3, 'ห้องประชุมภูพาน', 'ห้องประชุมภูพานที่โรงแรมขอนแก่นโฮเต็ล เป็นห้องประชุมที่ออกแบบมาเพื่อรองรับการจัดสัมมนา การประชุม และกิจกรรมต่างๆ ด้วยความจุสูงสุดถึง 120 ท่าน ห้องมีอุปกรณ์ครบครัน เช่น เครื่องโปรเจคเตอร์, จอภาพขนาดใหญ่, ระบบเสียงคุณภาพสูง, ไมโครโฟนไร้สาย และระบบแสงสว่างปรับได้ตามความต้องการ\r\n\r\nห้องประชุมภูพานตั้งอยู่ในทำเลสะดวก มีที่จอดรถเพียงพอ พร้อมบริการเครื่องดื่มกาแฟ น้ำดื่ม และอาหารว่างตามความต้องการของผู้ใช้บริการ นอกจากนี้ยังมีบริการที่พักมาตรฐานสูงที่ช่วยให้ผู้เข้าร่วมประชุมพักผ่อนอย่างสะดวกสบาย\r\n\r\nหากคุณต้องการพื้นที่ประชุมที่ครบครันและมีสิ่งอำนวยความสะดวกทันสมัย ห้องประชุมภูพานคือทางเลือกที่ดีที่สุดสำหรับการจัดกิจกรรมของคุณ', 120, '003.jpg', '15*43*3 ม.', 'จัดโต๊ะจีนได้ 60 โต๊ะ', 'available', NULL, 1000.00),
+(4, 4, 'ห้องประชุมอัพเดอะทาวน์', 'ห้องประชุมอัพเดอะทาวน์ที่โรงแรมขอนแก่นโฮเต็ล เป็นห้องประชุมที่เหมาะสำหรับการจัดงานที่ต้องการบรรยากาศหรูหราและทันสมัย โดยรองรับผู้เข้าร่วมได้สูงสุด 150 ท่าน ห้องประชุมได้รับการตกแต่งอย่างมีสไตล์ พร้อมอุปกรณ์ทันสมัย เช่น เครื่องโปรเจคเตอร์, จอภาพขนาดใหญ่, ระบบเสียงคมชัด, และไมโครโฟนไร้สาย\r\n\r\nห้องประชุมอัพเดอะทาวน์มาพร้อมบริการที่ครบครัน เช่น บริการเครื่องดื่มกาแฟและน้ำดื่ม รวมถึงอาหารว่างที่สามารถสั่งเพิ่มเติมได้ตามความต้องการของลูกค้า ห้องประชุมตั้งอยู่ในทำเลที่สะดวกสบาย มีที่จอดรถเพียงพอ และบริการที่พักสำหรับผู้เข้าร่วมประชุมที่ต้องการพักค้างคืน\r\nหากคุณกำลังมองหาสถานที่จัดประชุมที่มีทั้งความสะดวกสบายและความทันสมัย', 150, '004.jpg', '14*10*3 ม.', 'จัดโต๊ะจีนได้ 80 โต๊ะ', 'available', NULL, 1500.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `booking_id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `slip_path` varchar(255) NOT NULL,
+  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `verified` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `booking_id`, `email`, `slip_path`, `uploaded_at`, `verified`) VALUES
+(10, 10, '65010912629@msu.ac.th', 'uploads/slips/booking_10_1757255457_5b16d41d.jpg', '2025-09-07 14:30:57', 'approved'),
+(18, 11, '65010912629@msu.ac.th', 'uploads/slips/booking_11_1757257771_0aa10a76.jpg', '2025-09-07 15:09:31', 'approved'),
+(19, 11, '65010912629@msu.ac.th', 'uploads/slips/booking_11_1757257780_cad116c2.jpg', '2025-09-07 15:09:40', 'approved');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`booking`);
+
+--
+-- Indexes for table `hotel_info`
+--
+ALTER TABLE `hotel_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `meeting_rooms`
+--
+ALTER TABLE `meeting_rooms`
+  ADD PRIMARY KEY (`room_code`) USING BTREE;
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_payments_booking` (`booking_id`),
+  ADD KEY `idx_payments_email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `hotel_info`
+--
+ALTER TABLE `hotel_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `fk_payments_booking` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`booking`) ON DELETE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
