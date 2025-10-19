@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";  // ชื่อผู้ใช้ MySQL ของคุณ
-$password = "";      // รหัสผ่าน MySQL ของคุณ
+$password = "112233";      // รหัสผ่าน MySQL ของคุณ
 
 // เชื่อมต่อฐานข้อมูล user_db
 $userConn = new mysqli($servername, $username, $password, "user_db");
@@ -20,3 +20,4 @@ $hotelConn->set_charset('utf8mb4');
 /* alias เพื่อความเข้ากันได้กับไฟล์ที่ใช้ $conn (เช่น admin_dashboard.php) */
 if (!isset($conn)) { $conn = $hotelConn; }
 ?>
+
